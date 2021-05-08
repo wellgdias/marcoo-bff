@@ -1,0 +1,145 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Marcoo BFF",
+    "description": "Marcoo BFF",
+    "version": "0.0.1"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:{port}",
+      "description": "Local server",
+      "variables": {
+        "port": {
+          "default": "8082"
+        }
+      }
+    },
+    {
+      "url": "https://marcoo-bff.herokuapp.com/",
+      "description": "(Internal) Production server"
+    }
+  ],
+  "tags": [
+    {
+      "name": "API",
+      "description": "Microservice endpoints"
+    },
+    {
+      "name": "Health check",
+      "description": "Service health check"
+    }
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "summary": "Check service health",
+        "tags": [
+          "Health check"
+        ],
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthCheckResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalServerError"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Error": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "HealthCheckResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Application running at: 8082"
+          },
+          "healthy": {
+            "type": "boolean",
+            "example": true
+          },
+          "services": {
+            "type": "object",
+            "additionalProperties": {
+              "description": "A map of services, where the keys correspond to service names, and the value to it's health",
+              "type": "boolean",
+              "example": true
+            }
+          }
+        }
+      }
+    },
+    "parameters": {},
+    "responses": {
+      "ForbiddenError": {
+        "description": "Não possui permissão de acesso ao recurso",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "NotFoundError": {
+        "description": "Recurso não encontrado",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "InternalServerError": {
+        "description": "Erro interno no servidor",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "ServiceError": {
+        "description": "Erro de serviço",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      },
+      "BadRequestError": {
+        "description": "Erro de requisição mal formada",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      }
+    }
+  }
+}
