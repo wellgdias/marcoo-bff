@@ -7,6 +7,9 @@ export default joi
     PORT: joi.string().required(),
     APPLICATION_NAME: joi.string().default(name),
     APPLICATION_VERSION: joi.string().default(version),
+    SUPERMARKET_SERVICE: joi.string().required(),
+    PRODUCT_SERVICE: joi.string().required(),
+    PRICE_SERVICE: joi.string().required(),
   })
   .unknown()
   .required();

@@ -1,4 +1,3 @@
-import faker from 'faker';
 import * as server from '../src';
 
 jest.mock('../src/config', () => () => ({
@@ -59,7 +58,6 @@ describe.only('Server application', () => {
     const { sut } = makeSut();
 
     const port = 8081;
-    const mongoUri = faker.internet.url();
-    expect(await sut.startServer(port, mongoUri)).toBeUndefined();
+    expect(await sut.startServer(port)).toBeUndefined();
   });
 });
