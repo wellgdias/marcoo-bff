@@ -6,11 +6,12 @@ import createHealthCheck from '../middlewares/health-check';
 const healthCheckRouter = Router();
 
 const getServicesHealth: RequestHandler = async (req, res, next) => {
-  // const { config } = req.app.locals;
+  const { config } = req.app.locals;
 
   req.app.locals.healthServices = await healthServices([
-    { name: 'MongoDB Atlas', url: 'https://status.cloud.mongodb.com/' },
-
+    { name: 'Supermarket Service', url: config.services.supermarket.url },
+    { name: 'Product Service', url: config.services.product.url },
+    { name: 'Price Service', url: config.services.price.url },
   ]);
 
   return next();
