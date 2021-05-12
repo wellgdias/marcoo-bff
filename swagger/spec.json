@@ -77,10 +77,16 @@
           },
           "400": {
             "$ref": "#/components/responses/BadRequestError"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFoundError"
+          },
+          "502": {
+            "$ref": "#/components/responses/ServiceError"
           }
         },
-        "operationId": "get-supermarkets-products",
-        "description": "",
+        "operationId": "get-products",
+        "description": "Obtém produtos disponíveis",
         "parameters": [
           {
             "schema": {
@@ -101,6 +107,75 @@
           "in": "path",
           "required": true,
           "description": "Número do CEP"
+        }
+      ]
+    },
+    "/v1/supermarkets/{cep}/products/categories/{type}/{category}": {
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductResponse"
+                },
+                "examples": {
+                  "example-product": {
+                    "$ref": "#/components/examples/ProductExample"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequestError"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFoundError"
+          },
+          "502": {
+            "$ref": "#/components/responses/ServiceError"
+          }
+        },
+        "operationId": "get-products-by-categories",
+        "description": "Obtém os produtos por categoria",
+        "parameters": []
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "cep",
+          "in": "path",
+          "required": true,
+          "description": "Número do CEP"
+        },
+        {
+          "schema": {
+            "type": "string",
+            "enum": [
+              "first",
+              "second",
+              "third"
+            ]
+          },
+          "name": "type",
+          "in": "path",
+          "required": true,
+          "description": "Tipo da categoria"
+        },
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "category",
+          "in": "path",
+          "required": true,
+          "description": "Id da categoria"
         }
       ]
     }

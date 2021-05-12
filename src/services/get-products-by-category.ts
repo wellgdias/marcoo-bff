@@ -2,14 +2,9 @@ import axios from 'axios';
 import { NotFoundError, ServiceError } from '../business/errors';
 import { Product } from '../business/model/interfaces';
 
-export default async function getProducts(productUrl: string, name?: string) {
+export default async function getProductsByCategory(type: string, category: string, productUrl: string) {
   try {
-    let pathUrl;
-    pathUrl = '/v1/products';
-
-    if (name) {
-      pathUrl += `?name=${name}`;
-    }
+    const pathUrl = `/v1/products?type=${type}&category=${category}`;
 
     const response = await axios.get<Product[]>(`${productUrl}${pathUrl}`);
     const { data: products } = response;
