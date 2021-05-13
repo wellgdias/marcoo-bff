@@ -212,134 +212,165 @@
         }
       },
       "ProductResponse": {
-        "type": "array",
         "description": "",
-        "minItems": 1,
-        "uniqueItems": true,
+        "type": "object",
         "x-examples": {
-          "example-1": [
-            {
-              "_id": "609330b0642b8120248dd5fc",
-              "name": "Cerveja BUDWEISER Lata 350ml",
-              "brand": "Budweiser",
-              "categories": {
-                "first": "60932a930710622024cad153",
-                "second": "60932b250710622024cad1a1",
-                "third": "60932bdb0710622024cad36a"
-              },
-              "image": "https://i.ibb.co/3sDQSbD/bud-latinha.jpg",
-              "material": "Lata",
-              "volume": "350 ml",
-              "amount": "1",
-              "prices": [
-                {
-                  "_id": "609589da0710622024cad3a3",
-                  "id_supermarket": "60848b9c504e7f1bb1feb73d",
-                  "name": "São Vicente",
-                  "price": 2.65
+          "example-1": {
+            "data": [
+              {
+                "_id": "609330b0642b8120248dd5fc",
+                "name": "Cerveja BUDWEISER Lata 350ml",
+                "brand": "Budweiser",
+                "categories": {
+                  "first": "60932a930710622024cad153",
+                  "second": "60932b250710622024cad1a1",
+                  "third": "60932bdb0710622024cad36a"
                 },
-                {
-                  "_id": "609589da0710622024cad3a1",
-                  "id_supermarket": "608481c0504e7f1bb1feb73a",
-                  "name": "Carrefour",
-                  "price": 2.9
-                },
-                {
-                  "_id": "609589da0710622024cad3a4",
-                  "id_supermarket": "60848bc7504e7f1bb1feb73e",
-                  "name": "Dia%",
-                  "price": 2.91
-                },
-                {
-                  "_id": "609589da0710622024cad3a5",
-                  "id_supermarket": "60848c10504e7f1bb1feb73f",
-                  "name": "Makro Atacadista",
-                  "price": 2.91
-                },
-                {
-                  "_id": "609589da0710622024cad3a0",
-                  "id_supermarket": "60845d5468c33834de710e19",
-                  "name": "Hipermercado Extra",
-                  "price": 2.94
-                }
-              ]
-            }
-          ]
-        },
-        "items": {
-          "type": "object",
-          "properties": {
-            "_id": {
-              "type": "string",
-              "minLength": 1
-            },
-            "name": {
-              "type": "string",
-              "minLength": 1
-            },
-            "brand": {
-              "type": "string",
-              "minLength": 1
-            },
-            "image": {
-              "type": "string",
-              "minLength": 1
-            },
-            "material": {
-              "type": "string",
-              "minLength": 1
-            },
-            "volume": {
-              "type": "string",
-              "minLength": 1
-            },
-            "amount": {
-              "type": "string",
-              "minLength": 1
-            },
-            "prices": {
-              "type": "array",
-              "uniqueItems": true,
-              "minItems": 1,
-              "items": {
-                "type": "object",
-                "properties": {
-                  "_id": {
-                    "type": "string",
-                    "minLength": 1
+                "image": "https://i.ibb.co/3sDQSbD/bud-latinha.jpg",
+                "material": "Lata",
+                "volume": "350 ml",
+                "amount": "1",
+                "prices": [
+                  {
+                    "_id": "609589da0710622024cad3a3",
+                    "id_supermarket": "60848b9c504e7f1bb1feb73d",
+                    "name": "São Vicente",
+                    "price": 2.65
                   },
-                  "id_supermarket": {
-                    "type": "string",
-                    "minLength": 1
+                  {
+                    "_id": "609589da0710622024cad3a1",
+                    "id_supermarket": "608481c0504e7f1bb1feb73a",
+                    "name": "Carrefour",
+                    "price": 2.9
                   },
-                  "name": {
-                    "type": "string",
-                    "minLength": 1
+                  {
+                    "_id": "609589da0710622024cad3a4",
+                    "id_supermarket": "60848bc7504e7f1bb1feb73e",
+                    "name": "Dia%",
+                    "price": 2.91
                   },
-                  "price": {
-                    "type": "number"
+                  {
+                    "_id": "609589da0710622024cad3a5",
+                    "id_supermarket": "60848c10504e7f1bb1feb73f",
+                    "name": "Makro Atacadista",
+                    "price": 2.91
+                  },
+                  {
+                    "_id": "609589da0710622024cad3a0",
+                    "id_supermarket": "60845d5468c33834de710e19",
+                    "name": "Hipermercado Extra",
+                    "price": 2.94
                   }
-                },
-                "required": [
-                  "_id",
-                  "id_supermarket",
-                  "name",
-                  "price"
                 ]
               }
+            ]
+          }
+        },
+        "properties": {
+          "data": {
+            "type": "array",
+            "uniqueItems": true,
+            "minItems": 0,
+            "items": {
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "name": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "brand": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "categories": {
+                  "type": "object",
+                  "properties": {
+                    "first": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "second": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "third": {
+                      "type": "string",
+                      "minLength": 1
+                    }
+                  },
+                  "required": [
+                    "first",
+                    "second",
+                    "third"
+                  ]
+                },
+                "image": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "material": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "volume": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "amount": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "prices": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "minItems": 1,
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "_id": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "id_supermarket": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "name": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "price": {
+                        "type": "number"
+                      }
+                    },
+                    "required": [
+                      "_id",
+                      "id_supermarket",
+                      "name",
+                      "price"
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "_id",
+                "name",
+                "brand",
+                "image",
+                "material",
+                "volume",
+                "amount"
+              ]
             }
-          },
-          "required": [
-            "_id",
-            "name",
-            "brand",
-            "image",
-            "material",
-            "volume",
-            "amount",
-            "prices"
-          ]
-        }
+          }
+        },
+        "required": [
+          "data"
+        ]
       }
     },
     "parameters": {},
@@ -397,49 +428,56 @@
     },
     "examples": {
       "ProductExample": {
-        "value": [
-          {
-            "_id": "609330b0642b8120248dd5fc",
-            "name": "Cerveja BUDWEISER Lata 350ml",
-            "brand": "Budweiser",
-            "image": "https://i.ibb.co/3sDQSbD/bud-latinha.jpg",
-            "material": "Lata",
-            "volume": "350 ml",
-            "amount": "1",
-            "prices": [
-              {
-                "_id": "609589da0710622024cad3a3",
-                "id_supermarket": "60848b9c504e7f1bb1feb73d",
-                "name": "São Vicente",
-                "price": 2.65
+        "value": {
+          "data": [
+            {
+              "_id": "609330b0642b8120248dd5fc",
+              "name": "Cerveja BUDWEISER Lata 350ml",
+              "brand": "Budweiser",
+              "categories": {
+                "first": "60932a930710622024cad153",
+                "second": "60932b250710622024cad1a1",
+                "third": "60932bdb0710622024cad36a"
               },
-              {
-                "_id": "609589da0710622024cad3a1",
-                "id_supermarket": "608481c0504e7f1bb1feb73a",
-                "name": "Carrefour",
-                "price": 2.9
-              },
-              {
-                "_id": "609589da0710622024cad3a4",
-                "id_supermarket": "60848bc7504e7f1bb1feb73e",
-                "name": "Dia%",
-                "price": 2.91
-              },
-              {
-                "_id": "609589da0710622024cad3a5",
-                "id_supermarket": "60848c10504e7f1bb1feb73f",
-                "name": "Makro Atacadista",
-                "price": 2.91
-              },
-              {
-                "_id": "609589da0710622024cad3a0",
-                "id_supermarket": "60845d5468c33834de710e19",
-                "name": "Hipermercado Extra",
-                "price": 2.94
-              }
-            ]
-          }
-        ]
+              "image": "https://i.ibb.co/3sDQSbD/bud-latinha.jpg",
+              "material": "Lata",
+              "volume": "350 ml",
+              "amount": "1",
+              "prices": [
+                {
+                  "_id": "609589da0710622024cad3a3",
+                  "id_supermarket": "60848b9c504e7f1bb1feb73d",
+                  "name": "São Vicente",
+                  "price": 2.65
+                },
+                {
+                  "_id": "609589da0710622024cad3a1",
+                  "id_supermarket": "608481c0504e7f1bb1feb73a",
+                  "name": "Carrefour",
+                  "price": 2.9
+                },
+                {
+                  "_id": "609589da0710622024cad3a4",
+                  "id_supermarket": "60848bc7504e7f1bb1feb73e",
+                  "name": "Dia%",
+                  "price": 2.91
+                },
+                {
+                  "_id": "609589da0710622024cad3a5",
+                  "id_supermarket": "60848c10504e7f1bb1feb73f",
+                  "name": "Makro Atacadista",
+                  "price": 2.91
+                },
+                {
+                  "_id": "609589da0710622024cad3a0",
+                  "id_supermarket": "60845d5468c33834de710e19",
+                  "name": "Hipermercado Extra",
+                  "price": 2.94
+                }
+              ]
+            }
+          ]
+        }
       }
     }
   }

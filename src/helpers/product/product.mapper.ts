@@ -2,7 +2,7 @@
 import { Price, Product, Supermarket } from '../../business/model/interfaces';
 
 export default function productsMapper(products: Product[], prices: Price[], supermarkets: Supermarket[]) {
-  return products.map((product) => ({
+  const mappedProducts = products.map((product) => ({
     ...product,
     prices:
       prices
@@ -17,4 +17,6 @@ export default function productsMapper(products: Product[], prices: Price[], sup
           price: price.price,
         })),
   }));
+
+  return { data: mappedProducts };
 }

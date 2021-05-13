@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { NotFoundError, ServiceError } from '../business/errors';
-import { Product } from '../business/model/interfaces';
+import { ServiceError } from '../business/errors';
+import { ProductServiceResponse } from '../business/model/interfaces';
 
 export default async function getProducts(productUrl: string, name?: string) {
   try {
@@ -11,13 +11,10 @@ export default async function getProducts(productUrl: string, name?: string) {
       pathUrl += `?name=${name}`;
     }
 
-    const response = await axios.get<Product[]>(`${productUrl}${pathUrl}`);
-    const { data: products } = response;
+    const response = await axios.get<ProductServiceResponse>(`${productUrl}${pathUrl}`);
+    const { data: { data: products } } = response;
     return products;
   } catch (error) {
-    if (error.response.status === 404) {
-      throw new NotFoundError(error.response.data.message);
-    }
     throw new ServiceError('Falha ao consultar o microserviço de produtos');
   }
 }

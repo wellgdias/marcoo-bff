@@ -8,12 +8,20 @@ export interface Supermarket {
   logo: string
 }
 
+export interface SupermarketResponse {
+  data: Supermarket[]
+}
+
 export interface Price {
   _id: string,
   id_product: string,
   id_supermarket: string,
   price: number,
   date: string
+}
+
+export interface PriceResponse {
+  data: Price[]
 }
 
 export interface Product {
@@ -29,6 +37,10 @@ export interface Product {
   material: string,
   volume: string,
   amount: string
+}
+
+export interface ProductServiceResponse {
+  data: Product[]
 }
 
 export interface ServicesUrl {
