@@ -18,5 +18,6 @@ export default function productsMapper(products: Product[], prices: Price[], sup
         })),
   }));
 
-  return { data: mappedProducts };
+  const productsWithPrices = mappedProducts.filter((product) => product.prices.length);
+  return { data: productsWithPrices };
 }
