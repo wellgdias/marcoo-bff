@@ -180,7 +180,7 @@
       ]
     },
     "/v1/supermarkets/{cep}/products/checkout": {
-      "get": {
+      "post": {
         "summary": "Your GET endpoint",
         "tags": [],
         "responses": {

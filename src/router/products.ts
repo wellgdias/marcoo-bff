@@ -38,7 +38,7 @@ productRouter.get('/v1/supermarkets/:cep/products', async (req, res, next) => {
   }
 });
 
-productRouter.get('/v1/supermarkets/:cep/products/checkout', async (req, res, next) => {
+productRouter.post('/v1/supermarkets/:cep/products/checkout', async (req, res, next) => {
   const { cep } = req.params;
   const { data } = req.body;
   const {
