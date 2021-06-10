@@ -1,5 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-import productsMapper from '../../helpers/product/product.mapper';
+import productsMapper from '../../helpers/mappers/product-mapper';
 import getPrices from '../../services/get-prices';
 import getProductsByCategory from '../../services/get-products-by-category';
 import getSupermarkets from '../../services/get-supermarkets';

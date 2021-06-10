@@ -178,6 +178,96 @@
           "description": "Id da categoria"
         }
       ]
+    },
+    "/v1/supermarkets/{cep}/products/checkout": {
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CheckoutResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequestError"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFoundError"
+          },
+          "502": {
+            "$ref": "#/components/responses/ServiceError"
+          }
+        },
+        "operationId": "get-products-checkout",
+        "description": "Obtém a lista de comparação de preços no checkout",
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "",
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "array",
+                    "uniqueItems": true,
+                    "minItems": 1,
+                    "items": {
+                      "required": [
+                        "idProduct",
+                        "amount"
+                      ],
+                      "properties": {
+                        "idProduct": {
+                          "type": "string",
+                          "minLength": 1
+                        },
+                        "amount": {
+                          "type": "number"
+                        }
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "data"
+                ],
+                "x-examples": {
+                  "example-1": {
+                    "data": [
+                      {
+                        "idProduct": "asdfsdfsdf",
+                        "amount": 2
+                      },
+                      {
+                        "idProduct": "asdfsdfsdf",
+                        "amount": 1
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "cep",
+          "in": "path",
+          "required": true,
+          "description": "Número do CEP"
+        }
+      ]
     }
   },
   "components": {
@@ -371,6 +461,210 @@
         "required": [
           "data"
         ]
+      },
+      "CheckoutResponse": {
+        "description": "",
+        "type": "object",
+        "properties": {
+          "supermarkets": {
+            "type": "array",
+            "uniqueItems": true,
+            "minItems": 1,
+            "items": {
+              "required": [
+                "name",
+                "total"
+              ],
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "total": {
+                  "type": "number"
+                },
+                "products": {
+                  "type": "array",
+                  "uniqueItems": true,
+                  "minItems": 1,
+                  "items": {
+                    "required": [
+                      "idProduct",
+                      "name",
+                      "amount",
+                      "price",
+                      "total"
+                    ],
+                    "properties": {
+                      "idProduct": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "name": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "amount": {
+                        "type": "number"
+                      },
+                      "price": {
+                        "type": "number"
+                      },
+                      "total": {
+                        "type": "number"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "required": [
+          "supermarkets"
+        ],
+        "x-examples": {
+          "example-1": {
+            "supermarkets": [
+              {
+                "name": "Marcoo",
+                "total": 74.61,
+                "products": [
+                  {
+                    "idProduct": "609550324e3ef6461c0b0f8c",
+                    "name": "Cerveja HEINEKEN Garrafa 330ml",
+                    "amount": 1,
+                    "price": 3.56,
+                    "total": 3.56
+                  },
+                  {
+                    "idProduct": "609582bd0710622024cad380",
+                    "name": "Cerveja STELLA ARTOIS Long Neck 275ML",
+                    "amount": 1,
+                    "price": 1.69,
+                    "total": 1.69
+                  },
+                  {
+                    "idProduct": "609583600710622024cad385",
+                    "name": "Cerveja COLORADO Ribeirão Lager 600 ML Garrafa",
+                    "amount": 1,
+                    "price": 8.32,
+                    "total": 8.32
+                  },
+                  {
+                    "idProduct": "609583600710622024cad392",
+                    "name": "Refrigerante ANTARCTICA Guaraná Zero Lata 350ML 12 unidades",
+                    "amount": 4,
+                    "price": 15.26,
+                    "total": 61.04
+                  }
+                ]
+              },
+              {
+                "name": "São Vicente",
+                "total": 77.05,
+                "products": [
+                  {
+                    "idProduct": "609582bd0710622024cad380",
+                    "name": "Cerveja STELLA ARTOIS Long Neck 275ML",
+                    "amount": 1,
+                    "price": 1.81,
+                    "total": 1.81
+                  },
+                  {
+                    "idProduct": "609550324e3ef6461c0b0f8c",
+                    "name": "Cerveja HEINEKEN Garrafa 330ml",
+                    "amount": 1,
+                    "price": 4.53,
+                    "total": 4.53
+                  },
+                  {
+                    "idProduct": "609583600710622024cad385",
+                    "name": "Cerveja COLORADO Ribeirão Lager 600 ML Garrafa",
+                    "amount": 1,
+                    "price": 9.67,
+                    "total": 9.67
+                  },
+                  {
+                    "idProduct": "609583600710622024cad392",
+                    "name": "Refrigerante ANTARCTICA Guaraná Zero Lata 350ML 12 unidades",
+                    "amount": 4,
+                    "price": 15.26,
+                    "total": 61.04
+                  }
+                ]
+              },
+              {
+                "name": "Hipermercado Extra",
+                "total": 82.42,
+                "products": [
+                  {
+                    "idProduct": "609582bd0710622024cad380",
+                    "name": "Cerveja STELLA ARTOIS Long Neck 275ML",
+                    "amount": 1,
+                    "price": 1.79,
+                    "total": 1.79
+                  },
+                  {
+                    "idProduct": "609550324e3ef6461c0b0f8c",
+                    "name": "Cerveja HEINEKEN Garrafa 330ml",
+                    "amount": 1,
+                    "price": 4.01,
+                    "total": 4.01
+                  },
+                  {
+                    "idProduct": "609583600710622024cad385",
+                    "name": "Cerveja COLORADO Ribeirão Lager 600 ML Garrafa",
+                    "amount": 1,
+                    "price": 9.58,
+                    "total": 9.58
+                  },
+                  {
+                    "idProduct": "609583600710622024cad392",
+                    "name": "Refrigerante ANTARCTICA Guaraná Zero Lata 350ML 12 unidades",
+                    "amount": 4,
+                    "price": 16.76,
+                    "total": 67.04
+                  }
+                ]
+              },
+              {
+                "name": "Makro Atacadista",
+                "total": 82.73,
+                "products": [
+                  {
+                    "idProduct": "609582bd0710622024cad380",
+                    "name": "Cerveja STELLA ARTOIS Long Neck 275ML",
+                    "amount": 1,
+                    "price": 1.85,
+                    "total": 1.85
+                  },
+                  {
+                    "idProduct": "609550324e3ef6461c0b0f8c",
+                    "name": "Cerveja HEINEKEN Garrafa 330ml",
+                    "amount": 1,
+                    "price": 3.56,
+                    "total": 3.56
+                  },
+                  {
+                    "idProduct": "609583600710622024cad392",
+                    "name": "Refrigerante ANTARCTICA Guaraná Zero Lata 350ML 12 unidades",
+                    "amount": 4,
+                    "price": 17.25,
+                    "total": 69
+                  },
+                  {
+                    "idProduct": "609583600710622024cad385",
+                    "name": "Cerveja COLORADO Ribeirão Lager 600 ML Garrafa",
+                    "amount": 1,
+                    "price": 8.32,
+                    "total": 8.32
+                  }
+                ]
+              }
+            ]
+          }
+        }
       }
     },
     "parameters": {},

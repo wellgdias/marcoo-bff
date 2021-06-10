@@ -28,15 +28,14 @@ export interface Product {
   _id: string,
   name: string,
   brand: string,
-  categories: {
-    first: string,
-    second: string,
-    third: string
-  },
   image: string,
   material: string,
   volume: string,
   amount: string
+}
+
+export interface ProductCart extends Product{
+  amountCart: number
 }
 
 export interface ProductServiceResponse {
@@ -70,4 +69,9 @@ interface PricesResponse {
   id_supermarket: string,
   name: string,
   price: number
+}
+
+export interface InfoCart {
+  idProduct: string,
+  amount: number
 }
