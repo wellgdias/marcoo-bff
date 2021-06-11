@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable no-underscore-dangle */
 import { Price, ProductCart, Supermarket } from '../../business/model/interfaces';
 
@@ -18,7 +19,8 @@ export default function supermarketsMapper(products: ProductCart[], prices: Pric
         price: price.price,
         total: parseFloat((price.price * product.amountCart).toFixed(2)),
       }))[0])
-      .sort((current, next) => parseFloat(current.idProduct) - parseFloat(next.idProduct));
+      .sort((current, next) => ((current.idProduct > next.idProduct)
+        ? 1 : ((next.idProduct > current.idProduct) ? -1 : 0)));
 
     return {
       name: supermarket.name,
@@ -46,7 +48,9 @@ export default function supermarketsMapper(products: ProductCart[], prices: Pric
         price: listPrices[0],
         total: parseFloat((listPrices[0] * product.amountCart).toFixed(2)),
       };
-    }).sort((current, next) => parseFloat(current.idProduct) - parseFloat(next.idProduct));
+    })
+    .sort((current, next) => ((current.idProduct > next.idProduct)
+      ? 1 : ((next.idProduct > current.idProduct) ? -1 : 0)));
 
   const marcoo = {
     name: 'Marcoo',
