@@ -46,7 +46,7 @@ export default function supermarketsMapper(products: ProductCart[], prices: Pric
         price: listPrices[0],
         total: parseFloat((listPrices[0] * product.amountCart).toFixed(2)),
       };
-    });
+    }).sort((current, next) => parseFloat(current.idProduct) - parseFloat(next.idProduct));
 
   const marcoo = {
     name: 'Marcoo',
