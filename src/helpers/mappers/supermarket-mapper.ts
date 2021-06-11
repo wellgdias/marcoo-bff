@@ -62,5 +62,9 @@ export default function supermarketsMapper(products: ProductCart[], prices: Pric
   };
 
   mappedSupermarkets.push(marcoo);
-  return { supermarkets: mappedSupermarkets.sort((current, next) => current.total - next.total).slice(0, 4) };
+  const bestSupermarkets = mappedSupermarkets.sort((current, next) => current.total - next.total).slice(0, 4);
+  const sortedSupermarkets = bestSupermarkets.sort((current, next) => ((current.total < next.total)
+    ? 1 : ((next.total < current.total) ? -1 : 0)));
+
+  return { supermarkets: sortedSupermarkets };
 }
