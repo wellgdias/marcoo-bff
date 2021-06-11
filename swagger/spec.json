@@ -268,6 +268,43 @@
           "description": "Número do CEP"
         }
       ]
+    },
+    "/v1/address/{cep}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "cep",
+          "in": "path",
+          "required": true,
+          "description": "Número do CEP"
+        }
+      ],
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Address"
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFoundError"
+          },
+          "502": {
+            "$ref": "#/components/responses/ServiceError"
+          }
+        },
+        "operationId": "get-v1-address-cep",
+        "description": "Busca as informações do CEP informado"
+      }
     }
   },
   "components": {
@@ -663,6 +700,96 @@
                 ]
               }
             ]
+          }
+        }
+      },
+      "Address": {
+        "description": "",
+        "type": "object",
+        "properties": {
+          "altitude": {
+            "type": "number"
+          },
+          "cep": {
+            "type": "string",
+            "minLength": 1
+          },
+          "latitude": {
+            "type": "string",
+            "minLength": 1
+          },
+          "longitude": {
+            "type": "string",
+            "minLength": 1
+          },
+          "logradouro": {
+            "type": "string",
+            "minLength": 1
+          },
+          "bairro": {
+            "type": "string",
+            "minLength": 1
+          },
+          "cidade": {
+            "type": "object",
+            "properties": {
+              "ddd": {
+                "type": "number"
+              },
+              "ibge": {
+                "type": "string",
+                "minLength": 1
+              },
+              "nome": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "ddd",
+              "ibge",
+              "nome"
+            ]
+          },
+          "estado": {
+            "type": "object",
+            "properties": {
+              "sigla": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "sigla"
+            ]
+          }
+        },
+        "required": [
+          "altitude",
+          "cep",
+          "latitude",
+          "longitude",
+          "logradouro",
+          "bairro",
+          "cidade",
+          "estado"
+        ],
+        "x-examples": {
+          "example-1": {
+            "altitude": 10,
+            "cep": "10101010",
+            "latitude": "string",
+            "longitude": "string",
+            "logradouro": "string",
+            "bairro": "string",
+            "cidade": {
+              "ddd": 11,
+              "ibge": "string",
+              "nome": "string"
+            },
+            "estado": {
+              "sigla": "string"
+            }
           }
         }
       }

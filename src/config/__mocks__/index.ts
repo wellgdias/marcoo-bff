@@ -15,6 +15,10 @@ const config = () => ({
     price: {
       url: 'envVars.PRICE_SERVICE',
     },
+    cep: {
+      url: 'envVars.CEP_SERVICE',
+      token: 'envVars.AUTHORIZATION_TOKEN',
+    },
   },
 });
 

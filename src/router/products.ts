@@ -2,6 +2,7 @@ import { Router } from 'express';
 import getProducts from '../business/rules/get-products';
 import getProductsByCategory from '../business/rules/get-products-by-category';
 import getCheckout from '../business/rules/get-checkout';
+import getAddress from '../business/rules/get-address';
 
 const productRouter = Router();
 productRouter.get('/v1/supermarkets/:cep/products', async (req, res, next) => {
@@ -98,6 +99,28 @@ productRouter.get('/v1/supermarkets/:cep/products/categories/:type/:category', a
 
   try {
     const response = await getProductsByCategory(cep, type, category, servicesUrl);
+    res.status(200).json(response);
+    return next();
+  } catch (error) {
+    return next(error);
+  }
+});
+
+productRouter.get('/v1/address/:cep', async (req, res, next) => {
+  const { cep } = req.params;
+  const {
+    config: {
+      services: {
+        cep: {
+          url: addressUrl,
+          token,
+        },
+      },
+    },
+  } = res.app.locals;
+
+  try {
+    const response = await getAddress(cep, token, addressUrl);
     res.status(200).json(response);
     return next();
   } catch (error) {

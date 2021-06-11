@@ -10,6 +10,8 @@ export default joi
     SUPERMARKET_SERVICE: joi.string().required(),
     PRODUCT_SERVICE: joi.string().required(),
     PRICE_SERVICE: joi.string().required(),
+    CEP_SERVICE: joi.string().required(),
+    AUTHORIZATION_TOKEN: joi.string().required(),
   })
   .unknown()
   .required();
